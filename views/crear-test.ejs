@@ -5,7 +5,7 @@
   <%- include("./partials/nav.ejs") %>
   <h2>Nuevo test</h2>
   <div>
-    <form action="/api/tests">
+    <form action="/api/tests" method="POST">
       <label for="pregunta"></label>
       <textarea name="pregunta" id="pregunta" cols="30" rows="10"></textarea>
       <label for="answer1"></label>
