@@ -1,0 +1,32 @@
+
+
+
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+<body>
+  <%- include("./partials/nav.ejs") %>
+  <main>
+    <div class="tests content">
+        <h2>All Tests</h2>
+        <% if (tests.length > 0) { %>
+        <% tests.forEach(test => { %>
+      
+        <h3 class="title"><%= test.Question %></h3>
+        <ul>
+            <li><%= test.answer1 %></li>
+            <li><%= test.answer2 %></li>
+            <li><%= test.answer3 %></li>
+            <li><%= test.answer4 %></li>
+        </ul>
+        
+        <% }) %>
+        <% } else { %>
+        <p>There are no tests to display...</p>
+        <% } %>
+      
+      </div>
+  </main>
+  <%- include("./partials/footer.ejs") %>
+  <script src="/scripts/test.js"></script>
+</body>
+</html>

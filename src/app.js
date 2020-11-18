@@ -38,9 +38,20 @@ app.get('/', async (req, res) => {
     
 })
 
+app.get('/listado', async (req, res) => {
+    try{
+        const quizs = await test.find({})
+        res.render("index", {title: "Index", quizs})
+    } catch(e){
+        res.status(500).send()
+    }
+    
+})
+
+
 
 app.get('/create', (req, res) => {
-    res.render('create', {title: "Create test"})   
+    res.render('crear-test', {title: "Create test"})   
 })
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }));
