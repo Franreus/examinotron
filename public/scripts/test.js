@@ -9,10 +9,10 @@ if(fishInfo.dataset.spec){
 			fishInfo.innerHTML += `<h2>${test['Species'].charAt(0).toUpperCase() + test['Species'].slice(1)}</h2>
 				<p class="description"><b>Author:</b> ${test['Author']}<br/><br/>${test['Comments']}</p>
 				<img src="${test['image']}"/>
-				<div class="add-test">Add Film to favorites</div>`
+				<div class="add-test">Add Test to favorites</div>`
 			const addFishButton = document.querySelector('.add-test')
 			addFishButton.addEventListener('click', async () => {
-				await fetch('../api/films',{
+				await fetch('../api/tests',{
 					method: "POST",
 					headers: {
 						'Accept': 'application/json',
@@ -28,6 +28,6 @@ if(fishInfo.dataset.spec){
 				}).then(res => res.text()).then(data => alert(data)).catch(e => console.log(e))
 				//alert('Added')
 			})
-		}else fishInfo.innerHTML = '<h2>Film Not found</h2>'
+		}else fishInfo.innerHTML = '<h2>Test Not found</h2>'
 	}).catch(err => console.log(err))
 } */

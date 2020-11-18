@@ -1,5 +1,5 @@
 /* const fishList = document.querySelector('.test-list')
-fetch(`api/films`)
+fetch(`api/tests`)
 	.then(response => response.json())
 	.then(data => {
 		data.forEach(test => {
