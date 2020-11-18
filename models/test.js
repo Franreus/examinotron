@@ -1,12 +1,7 @@
 const mongoose = require('mongoose')
 
 const Test = mongoose.model('Test', {
-    id: {
-        type: Number,
-        required: true
-    },
-   
-    Question: {
+    question: {
         type: String,
 		required: true,
 		trim: true
@@ -28,7 +23,6 @@ const Test = mongoose.model('Test', {
         required: false,
 		trim: true
     },
-
     answer4: {
         type: String,
         required: false,

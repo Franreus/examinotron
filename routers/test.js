@@ -1,40 +1,32 @@
 const express = require('express')
-const Test = require('../models/test')
 const router = new express.Router()
-const test = require('../models/test')
+const Test = require('../models/test')
 
-router.post('/test', async (req, res) => {
-    const test = new test(req.body)
-    let question = req.body.question
-    let answer1 = req.body.answer1
-    let answer2 = req.body.answer2
-    let answer3 = req.body.answer3
-    let answer4 = req.body.answer4
-    let newtest = {question, answer1, answer2, answer3, answer4}
+router.post('/tests', async (req, res) => {
+    const test = new Test(req.body)
 
     try {
-        await Test.save(newQuiz)
-        // res.status(201).send(newtest)
-        res.status(201).redirect("/")
+        await test.save()
+        res.status(201).send(test)
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.get('/test', async (req, res) => {
+router.get('/tests', async (req, res) => {
     try {
-        const quizs = await test.find({})
-        res.send(quizs)
+        const tests = await Test.find({})
+        res.send(tests)
     } catch (e) {
         res.status(500).send()
     }
 })
 
-router.get('/quizs/:id', async (req, res) => {
+router.get('/tests/:id', async (req, res) => {
     const _id = req.params.id
 
     try {
-        const test = await test.findById(_id)
+        const test = await Test.findById(_id)
 
         if (!test) {
             return res.status(404).send()
@@ -46,9 +38,9 @@ router.get('/quizs/:id', async (req, res) => {
     }
 })
 
-router.patch('/quizs/:id', async (req, res) => {
+router.patch('/tests/:id', async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['question', 'answer1', 'answer2', 'answer3', 'answer4']
+    const allowedUpdates = ['question', 'answer1', 'answer2','answer3','answer4',]
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
@@ -56,7 +48,7 @@ router.patch('/quizs/:id', async (req, res) => {
     }
 
     try {
-        const test = await test.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        const test = await Test.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
         if (!test) {
             return res.status(404).send()
@@ -68,9 +60,9 @@ router.patch('/quizs/:id', async (req, res) => {
     }
 })
 
-router.delete('/quizs/:id', async (req, res) => {
+router.delete('/tests/:id', async (req, res) => {
     try {
-        const test = await test.findByIdAndDelete(req.params.id)
+        const test = await Test.findByIdAndDelete(req.params.id)
 
         if (!test) {
             res.status(404).send()

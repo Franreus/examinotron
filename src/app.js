@@ -53,8 +53,9 @@ app.get('/listado', async (req, res) => {
 app.get('/create', (req, res) => {
     res.render('crear-test', {title: "Create test"})   
 })
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', quizRouter)
 

@@ -3,8 +3,21 @@
 
 <body>
   <%- include("./partials/nav.ejs") %>
-  <h2>TEST DE PREGUNTAS </h2>
-  <div class="test-list">
+  <h2>Nuevo test</h2>
+  <div>
+    <form action="">
+      <label for="pregunta"></label>
+      <textarea name="pregunta" id="pregunta" cols="30" rows="10"></textarea>
+      <label for="answer1"></label>
+      <textarea name="answer1" id="answer1" cols="30" rows="10"></textarea>
+      <label for="answer2"></label>
+      <textarea name="answer2" id="answer2" cols="30" rows="10"></textarea>
+      <label for="answer3"></label>
+      <textarea name="answer3" id="answer3" cols="30" rows="10"></textarea>
+      <label for="answer4"></label>
+      <textarea name="answer4" id="answer4" cols="30" rows="10"></textarea>
+      <input type="submit" value="">
+    </form>
   </div>
 
   <%- include("./partials/footer.ejs") %>
