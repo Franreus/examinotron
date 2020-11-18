@@ -1,62 +1,84 @@
 const express = require('express')
-const Test = require('../models/tests')
+const Test = require('../models/test')
 const router = new express.Router()
+const test = require('../models/test')
 
-router.get('/tests', async (req, res) => {
+router.post('/test', async (req, res) => {
+    const test = new test(req.body)
+    let question = req.body.question
+    let answer1 = req.body.answer1
+    let answer2 = req.body.answer2
+    let answer3 = req.body.answer3
+    let answer4 = req.body.answer4
+    let newtest = {question, answer1, answer2, answer3, answer4}
+
     try {
-        const tests = await Test.find({})
-        if (!tests) return res.status(404).send()
-        return res.send(tests)
+        await Test.save(newQuiz)
+        // res.status(201).send(newtest)
+        res.status(201).redirect("/")
     } catch (e) {
-        return res.status(500).send()
+        res.status(400).send(e)
     }
 })
 
-router.get('/tests/:id', async (req, res) => {
+router.get('/test', async (req, res) => {
     try {
-        const test = await Test.findById(req.params.id)
-        if (!test) return res.status(404).send()
-        return res.send(test)
+        const quizs = await test.find({})
+        res.send(quizs)
     } catch (e) {
-        return res.status(500).send()
+        res.status(500).send()
     }
 })
 
-router.post('/tests', async (req, res) => {
-	try {
-		const oldFilm = await Test.find({"id":req.body['id']})
-		if(oldFilm.length > 0)	return res.send('Test already exists')
-		const test = new Test(req.body)
-		await test.save()
-		res.status(201).send('Test Added')
-	} catch (e){
-		return res.status(400).send(e)
-	}
-	
+router.get('/quizs/:id', async (req, res) => {
+    const _id = req.params.id
+
+    try {
+        const test = await test.findById(_id)
+
+        if (!test) {
+            return res.status(404).send()
+        }
+
+        res.send(test)
+    } catch (e) {
+        res.status(500).send()
+    }
 })
 
-router.patch('/tests/:id', async (req, res) => {
+router.patch('/quizs/:id', async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['author']
+    const allowedUpdates = ['question', 'answer1', 'answer2', 'answer3', 'answer4']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
-    if (!isValidOperation) return res.status(400).send({ error: 'Invalid updates!' })
-	try{
-        const test = await Test.findByIdAndUpdate(req.params.id,req.body)
-		if (!test) return res.status(404).send()
-        return res.send(test)
-	}catch{
-		return res.status(500).send()
-	}
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
+
+    try {
+        const test = await test.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+        if (!test) {
+            return res.status(404).send()
+        }
+
+        res.send(test)
+    } catch (e) {
+        res.status(400).send(e)
+    }
 })
 
-router.delete('/tests/:id', async (req, res) => {
+router.delete('/quizs/:id', async (req, res) => {
     try {
-        const test = await Test.findByIdAndDelete(req.params.id)
-        if (!test) return res.status(404).send()
-        return res.send(test)
+        const test = await test.findByIdAndDelete(req.params.id)
+
+        if (!test) {
+            res.status(404).send()
+        }
+
+        res.send(test)
     } catch (e) {
-        return res.status(500).send()
+        res.status(500).send()
     }
 })
 
