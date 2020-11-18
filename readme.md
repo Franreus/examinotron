@@ -1,4 +1,4 @@
 # REST API
 
 
-[text](https://dashboard.heroku.com/apps/franexaminotron)
+[text](https://franexaminotron.herokuapp.com/)
