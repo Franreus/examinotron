@@ -198,7 +198,7 @@ h2, .test-info h2 {
 		font-weight: bold;
 	}
 	form input {
-		height: 3vh;
+		height: 30px;
 	}
 	form button {
 		cursor: pointer;
