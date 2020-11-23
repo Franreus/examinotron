@@ -6,10 +6,10 @@
 <body>
   <%- include("./partials/nav.ejs") %>
   <main>
-    <div class="tests content">
+    <div class="quizs content">
         <h2>All Tests</h2>
-        <% if (tests.length > 0) { %>
-        <% tests.forEach(test => { %>
+        <% if (quizs.length > 0) { %>
+        <% quizs.forEach(test => { %>
       
         <h3 class="title"><%= test.question %></h3>
         <ul>
